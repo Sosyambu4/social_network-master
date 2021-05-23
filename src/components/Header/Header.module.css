@@ -1,0 +1,9 @@
+.header{
+   grid-area: h;
+   background-image: url("https://i.pinimg.com/originals/83/74/cc/8374cc6869ac149f2c5aa4288db4efd9.jpg");
+   }
+   .header img{
+      height: 65px;
+
+      margin-left: 1px;
+   }
