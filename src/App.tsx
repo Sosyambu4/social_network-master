@@ -9,8 +9,9 @@ import {ActionsTypes, StateType, store, StoreType} from "./redux/state";
 import {News} from './components/New/New';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Setting";
+import DialogsConteiner from "./components/Dialogs/DialogsConteiner";
 
-export type AppType = {
+export type AppType =  {
     state: StateType;
     dispatch: (action: ActionsTypes) => void;
 }
@@ -23,9 +24,11 @@ const App = (props: AppType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
-                           render={() => <Dialogs stateMessagesPage={props.state.messagesPage}
-                           dispatch={props.dispatch}
-                                                  onChange={props.state.messagesPage.newMessageBody}
+                           render={() => <DialogsConteiner
+                               stateMessagesPage={props.state.messagesPage}
+                               dispatch={props.dispatch}
+                               onChange={props.state.messagesPage.newMessageBody}
+
                            />}/>
                     <Route path='/profile'
                            render={() => <Profile stateProfilePage={props.state.profilePage}

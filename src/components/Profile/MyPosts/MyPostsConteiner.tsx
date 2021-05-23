@@ -10,8 +10,6 @@ export type PropsType = ProfileType & {
 
 
 const MyPostsContainer = (props: PropsType) => {
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
-
 
     let addPost = () => {
         props.dispatch(addPostAC(props.newPostText))
@@ -26,7 +24,7 @@ const MyPostsContainer = (props: PropsType) => {
             onAddPost={addPost}
             newTextChangeHandler={newTextChangeHandler}
             posts={props.posts}
-            newPostText={props.newPostText}/>
+            newPostText={props.newPostText} />
     )
 }
 export default MyPostsContainer;

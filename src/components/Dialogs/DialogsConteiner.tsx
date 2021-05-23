@@ -9,6 +9,8 @@ import {
 
 } from "../../redux/state";
 import {SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "../../redux/dialogs-reducer";
+import {newTextChangeHandlerAC} from "../../redux/profile-reducer";
+import Dialogs from "./Dialogs";
 
 export type DialogsPropsType = {
     stateMessagesPage: DialogsPageType;
@@ -19,34 +21,24 @@ export type DialogsPropsType = {
 
 
 
-const Dialogs = (props: DialogsPropsType) => {
-
-
-    let messagesElements = props.stateMessagesPage.messages.map(m => <Message message={m.message}/>);
-    let dialogsElements = props.stateMessagesPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>);
-    let newMessageBody = props.stateMessagesPage.newMessageBody;
+const DialogsConteiner = (props: DialogsPropsType) => {
 
    const addMessage = () => props.dispatch(SEND_MESSAGE())
 
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    /*const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch((UPDATE_NEW_MESSAGE_BODY)(e.currentTarget.value))
+    }*/
+    const onNewMessageChange = (message: string) => {
+        props.dispatch(UPDATE_NEW_MESSAGE_BODY(message))
     }
 
-
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>{dialogsElements}</div>
-            <div className={s.messages}>
-                <div>{messagesElements}</div>
-                <div><textarea value={newMessageBody}
-                    onChange ={onNewMessageChange}>
-                </textarea></div>
-             <div>
-                <button onClick={addMessage}>+</button>
-            </div>
-            </div>
-        </div>
-    )
-}
+       <Dialogs onNewMessageChange={onNewMessageChange}
+                addMessage={addMessage}
+                dispatch={props.dispatch}
+                onChange={props.onChange}
+                stateMessagesPage={props.stateMessagesPage}/>
+    )}
 
-export default Dialogs;
+
+export default DialogsConteiner;

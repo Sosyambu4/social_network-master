@@ -14,24 +14,29 @@ export type DialogsPropsType = {
     stateMessagesPage: DialogsPageType;
     dispatch: (action: ActionsTypes) => void;
     onChange: string;
-
+    onNewMessageChange: (message: string) => void
+    addMessage: () => void
 };
 
 
 
 const Dialogs = (props: DialogsPropsType) => {
 
+    let state = props.stateMessagesPage
 
     let messagesElements = props.stateMessagesPage.messages.map(m => <Message message={m.message}/>);
     let dialogsElements = props.stateMessagesPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>);
     let newMessageBody = props.stateMessagesPage.newMessageBody;
 
-   const addMessage = () => props.dispatch(SEND_MESSAGE())
+    const addMessage = () => props.addMessage();
 
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+   /* const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch((UPDATE_NEW_MESSAGE_BODY)(e.currentTarget.value))
+    }*/
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let message = e.currentTarget.value
+        props.onNewMessageChange(message)
     }
-
 
     return (
         <div className={s.dialogs}>
