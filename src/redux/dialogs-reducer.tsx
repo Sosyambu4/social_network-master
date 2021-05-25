@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ActionsTypes, DialogsPageType} from "./state";
+import {ActionsTypes} from "./state";
 
 export const UPDATE_NEW_MESSAGE_BODY = (body: string) => {
     return {
@@ -28,6 +28,19 @@ const initialState = {
         {id: v1(), name: 'Wladyslaw'}
     ],
     newMessageBody: "",
+}
+type DialogType = {
+    name: string;
+    id: string;
+}
+type MessageType = {
+    message: string;
+    id?: string;
+}
+export type DialogsPageType = {
+    dialogs: Array<DialogType>;
+    messages: Array<MessageType>;
+    newMessageBody: string
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {

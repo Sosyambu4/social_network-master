@@ -1,37 +1,38 @@
 import React from 'react';
-import Post from './Post/Post';
-import {ActionsTypes, ProfileType, StateType} from "../../../redux/state";
-import {addPostAC, newTextChangeHandlerAC} from "../../../redux/profile-reducer";
+import {addPostAC, newTextChangeHandlerAC, ProfileType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import {StoreContext} from "../../../StoreContext";
+import {connect} from "react-redux";
+import {ActionsTypes, AppStoreType} from "../../../redux/redux-store";
 
-export type PropsType = ProfileType & {
+/*export type PropsType = ProfileType & {
     dispatch: (action: ActionsTypes) => void;
+}*/
+
+type mapStateToPropsType = ProfileType
+type mapDispatchToProps = {
+    addPost: () => void
+    newTextChangeHandler: (post: string) => void
+}
+export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToProps
+
+
+const mapStateToProps = (state: AppStoreType): mapStateToPropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
+    }
+}
+const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): mapDispatchToProps => {
+    return {
+        addPost: () => {
+            dispatch(addPostAC())
+        },
+        newTextChangeHandler: (post: string) => {
+            dispatch(newTextChangeHandlerAC(post))
+        }
+    }
 }
 
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
-const MyPostsContainer = (props: PropsType) => {
-    return (
-        <StoreContext.Consumer>{
-            (store) => {
-
-                let addPost = () => {
-                    props.dispatch(addPostAC(props.newPostText))
-                };
-
-                const newTextChangeHandler = (post: string) => {
-                    props.dispatch(newTextChangeHandlerAC(post))
-                };
-
-                return <MyPosts
-                    onAddPost={addPost}
-                    newTextChangeHandler={newTextChangeHandler}
-                    posts={props.posts}
-                    newPostText={props.newPostText}/>
-            }
-        }
-            </StoreContext.Consumer>
-            )
-            }
-            export default MyPostsContainer;
 

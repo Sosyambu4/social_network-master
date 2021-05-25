@@ -32,9 +32,6 @@ export type MessageType = {
 export type ProfileType = {
     posts: Array<PostsType>
     newPostText: string;
-
-
-
 }
 export type PostsType = {
     message: string;
