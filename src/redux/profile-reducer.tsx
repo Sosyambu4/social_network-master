@@ -38,17 +38,20 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
                 message: state.newPostText,
                 likesCount: 0
             };
-            let stateCopy = {...state}
-            stateCopy.posts = [...state.posts];
+            return    {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            };
+            /*stateCopy.posts = [...state.posts];
             stateCopy.posts.push(newPost)
-            stateCopy.newPostText = "";
-            return stateCopy;
+            stateCopy.newPostText = "";*/
+
     }
         case 'UPDATE-NEW-POST-TEXT': {
-            let stateCopy = {...state};
-
-        stateCopy.newPostText = action.newText;
-        return stateCopy;
+            return  {...state,
+                newPostText: action.newText
+            };
     }
         default: return state;
     }

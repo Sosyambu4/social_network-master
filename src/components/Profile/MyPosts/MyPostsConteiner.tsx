@@ -4,9 +4,6 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {ActionsTypes, AppStoreType} from "../../../redux/redux-store";
 
-/*export type PropsType = ProfileType & {
-    dispatch: (action: ActionsTypes) => void;
-}*/
 
 type mapStateToPropsType = ProfileType
 type mapDispatchToProps = {

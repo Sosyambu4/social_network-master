@@ -3,7 +3,7 @@ import {ActionsTypes} from "./state";
 
 export const UPDATE_NEW_MESSAGE_BODY = (body: string) => {
     return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
+        type: 'UPDATE_NEW_MESSAGE_BODY',
         body: body
     } as const
 }
@@ -44,15 +44,24 @@ export type DialogsPageType = {
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
+
+    let stateCopy ;
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body;
-            return state;
+        case "UPDATE_NEW_MESSAGE_BODY":
+            stateCopy = {...state,
+                newMessageBody: action.body
+            };
+            return stateCopy;
         case "SEND_MESSAGE":
             let body = state.newMessageBody;
-            state.newMessageBody = "";
-            state.messages.push({id: v1(), message: body});
-            return state;
+            stateCopy = {
+                ...state,
+                newMessageBody: "",
+                messages:[...state.messages, {id: v1(), message: body}]
+            };
+            /*stateCopy.newMessageBody = "";
+            stateCopy.messages.push({id: v1(), message: body});*/
+            return stateCopy;
         default: return state;
     }
 
