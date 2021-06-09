@@ -8,6 +8,7 @@ import {News} from './components/New/New';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Setting";
 import {DialogsContainer} from "./components/Dialogs/DialogsConteiner";
+import {Users} from "./components/Users/Users";
 
 export type AppType =  {
     /*state: StateType;
@@ -22,21 +23,19 @@ const App = (props: AppType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
-                           render={() => <DialogsContainer/>/*<DialogsConteiner
-                               stateMessagesPage={props.state.messagesPage}
-                               dispatch={props.dispatch}
-                               onChange={props.state.messagesPage.newMessageBody}
+                           render={() => <DialogsContainer/>}/>
 
-                           />*/}/>
                     <Route path='/profile'
-                           render={() => <Profile /*stateProfilePage={props.state.profilePage}
-                                                  dispatch={props.dispatch}*/
+                           render={() => <Profile />}/>
+                    <Route path='/users' render={ () => <Users/>}/>
 
-                           />}/>
                     <Route path='/news' render={() => <News/>}/>
+
                     <Route path='/music' render={() => <Music/>}/>
+
                     <Route path='/settings' render={() => <Settings/>}/>
                 </div>
+
             </div>
         </BrowserRouter>
     )
