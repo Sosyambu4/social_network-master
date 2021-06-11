@@ -18,21 +18,29 @@ export type UserType = {
     location: UsersLocation
 }
 
-type initialStateType = {
+export type initialStateType = {
     users: Array<UserType>
 }
 
 
-export const FOLLOW = (userId:number) => {
+export const followAC = (userId:number) => {
     return {
         type: "FOLLOW",
-        userId:userId
+        userId
     } as const
 }
-export const UNFOLLOW = (userId:number) => {
+
+export const unfollowAC = (userId:number) => {
     return {
         type: 'UNFOLLOW',
-        userId:userId
+        userId
+    } as const
+}
+
+export const setUsersAC = (users:Array<UserType>) => {
+    return {
+        type: "SET-USERS",
+        users
     } as const
 }
 
@@ -41,8 +49,8 @@ export const initialState = {
         /*{id: v1(),followed: false , fullName: 'Wladyslaw', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
         {id: v1(),followed: true , fullName: 'Andrew', status:'i am a boss', location: {city:'Kharkov', country:'Ukraine'}},
         {id: v1(),followed: true , fullName: 'Sasha', status:'i am a boss', location: {city:'Minsk', country:'Belarus'}},
-        {id: v1(),followed: false , fullName: 'Bogdan', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},*/
-        ]
+        {id: v1(),followed: false , fullName: 'Bogdan', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
+        */]
 }
 
 
@@ -66,10 +74,15 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
                         return {...u, followed: false};
                     }
                     return u;
-                })};
+                })
+            };
+        case "SET-USERS":
+            return {
+                ...state,
+                users:[...state.users, ...action.users]
+            }
 
         default: return state;
     }
 }
-export const followAC = (userId:number) => ({type: FOLLOW, userId});
-export const unfollowAC = (userId:number) => ({type: UNFOLLOW, userId })
+

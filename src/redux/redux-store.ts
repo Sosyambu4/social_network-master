@@ -1,6 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
 import {dialogsReducer, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogs-reducer";
+import {usersReducer} from "./users-reducer";
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
@@ -12,7 +13,8 @@ export type ActionsTypes =
 
 let reducers = combineReducers({
     profilePage: profileReducer,
-    dialogsPage: dialogsReducer
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer
 })
 
 export type AppStoreType = ReturnType<typeof reducers>

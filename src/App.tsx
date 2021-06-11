@@ -9,6 +9,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Setting";
 import {DialogsContainer} from "./components/Dialogs/DialogsConteiner";
 import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 export type AppType =  {
     /*state: StateType;
@@ -27,7 +28,7 @@ const App = (props: AppType) => {
 
                     <Route path='/profile'
                            render={() => <Profile />}/>
-                    <Route path='/users' render={ () => <Users/>}/>
+                    <Route path='/users' render={ () => <UsersContainer/>}/>
 
                     <Route path='/news' render={() => <News/>}/>
 
