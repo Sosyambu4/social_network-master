@@ -10,7 +10,6 @@ export type ActionsTypes =
     ReturnType<typeof SEND_MESSAGE>
 
 
-
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,

@@ -23,35 +23,35 @@ export type initialStateType = {
 }
 
 
-export const followAC = (userId:number) => {
+export const followAC = (userId: number) => {
     return {
         type: "FOLLOW",
         userId
     } as const
 }
 
-export const unfollowAC = (userId:number) => {
+export const unfollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId
     } as const
 }
 
-export const setUsersAC = (users:Array<UserType>) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
         users
     } as const
 }
 
-export const initialState = {
-    users: [
-        /*{id: v1(),followed: false , fullName: 'Wladyslaw', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
-        {id: v1(),followed: true , fullName: 'Andrew', status:'i am a boss', location: {city:'Kharkov', country:'Ukraine'}},
-        {id: v1(),followed: true , fullName: 'Sasha', status:'i am a boss', location: {city:'Minsk', country:'Belarus'}},
-        {id: v1(),followed: false , fullName: 'Bogdan', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
-        */]
-}
+export const initialState: initialStateType = {
+    users: [/*
+        {id: 1,followed: false , fullName: 'Wladyslaw', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
+        {id: 2,followed: true , fullName: 'Andrew', status:'i am a boss', location: {city:'Kharkov', country:'Ukraine'}},
+        {id: 3,followed: true , fullName: 'Sasha', status:'i am a boss', location: {city:'Minsk', country:'Belarus'}},
+        {id: 4,followed: false , fullName: 'Bogdan', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},*/
+    ]
+};
 
 
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -79,10 +79,11 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
         case "SET-USERS":
             return {
                 ...state,
-                users:[...state.users, ...action.users]
+                users: [...state.users, ...action.users]
             }
 
-        default: return state;
+        default:
+            return state;
     }
 }
 
