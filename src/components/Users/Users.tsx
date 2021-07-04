@@ -7,17 +7,14 @@ import {UsersPropsType} from "./UsersContainer";
 
 
 export class Users extends React.Component<UsersPropsType> {
+    componentDidMount() {
+            if (this.props.usersPage.users.length === 0) {
 
-    constructor(props:UsersPropsType) {
-        super(props);
-
-    if (this.props.usersPage.users.length === 0) {
-        alert("запрос начался")
-         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-    this.props.setUsers(response.data.items)
-         alert("конец")}
-)}
-    }
+                axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                    this.props.setUsers(response.data.items)
+                    }
+                )}
+        }
 
     render () {
         return <div>
