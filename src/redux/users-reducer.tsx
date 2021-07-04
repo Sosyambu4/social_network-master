@@ -11,9 +11,9 @@ export type FindUsersPage = {
 
 export type UserType = {
     id: number
-    photoURL: string
+    photos: {small: string | null, large: string | null}
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: UsersLocation
 }

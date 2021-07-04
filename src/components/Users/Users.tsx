@@ -1,63 +1,54 @@
 import React from "react";
+import userPhoto from "../../assets/images/users1.png";
+import user from "./User.module.css";
+import axios from "axios";
 import {UsersPropsType} from "./UsersContainer";
 
 
-export const Users = (props:UsersPropsType) => {
-    if (props.usersPage.users.length === 0)
-    {
-        props.setUsers([
-            {
-                id: 1,
-                photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuUIseBsvJgFgOBzFthISFzE6gkHosm-DszQ&usqp=CAU',
-                followed: true,
-                fullName: 'Wladysalaw',
-                status: 'I am a programmer',
-                location: {city: 'Gdansk', country: 'Poland'}
-            },
-            {
-                id: 2,
-                photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuUIseBsvJgFgOBzFthISFzE6gkHosm-DszQ&usqp=CAU',
-                followed: true,
-                fullName: 'Artem',
-                status: 'I am a boss',
-                location: {city: 'Kharkov', country: 'Ukraine'}
-            },
-            {
-                id: 3,
-                photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuUIseBsvJgFgOBzFthISFzE6gkHosm-DszQ&usqp=CAU',
-                followed: true,
-                fullName: 'Kamila',
-                status: 'I am a superstar',
-                location: {city: 'Moskow', country: 'Russia'}
-            }
-            ]
-        )
+
+export class Users extends React.Component<UsersPropsType> {
+
+    constructor(props:UsersPropsType) {
+        super(props);
+
+    if (this.props.usersPage.users.length === 0) {
+        alert("запрос начался")
+         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+    this.props.setUsers(response.data.items)
+         alert("конец")}
+)}
     }
-    return <div>
-        {
-            props.usersPage.users.map(u => <div key={u.id}>
+
+    render () {
+        return <div>
+            {/*<button onClick={this.getUsers}>Get Users</button>*/}
+            {this.props.usersPage.users.map(u => {
+                        console.log(u.photos)
+                        return  <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photoURL}/>
+                        <img src ={u.photos.small ?  u.photos.small: userPhoto} className={user.userPhoto} />
                     </div>
                     <div>
                         {u.followed
-                        ? <button onClick={() => {props.unfollow(u.id)}}>Unfollow</button>
-                        : <button onClick={() => {props.follow(u.id)}}>Follow</button>}
+                            ? <button onClick={() => {this.props.unfollow(u.id)}}>Unfollow</button>
+                            : <button onClick={() => {this.props.follow(u.id)}}>Follow</button>}
                     </div>
                 </span>
-                <span>
+                            <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
                     </span>
                 </span>
-    </div>
-            )}
-    </div>
+                        </div>
+                    }
 
+                )}
+        </div>
+    }
 }

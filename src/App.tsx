@@ -8,10 +8,10 @@ import {News} from './components/New/New';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Setting";
 import {DialogsContainer} from "./components/Dialogs/DialogsConteiner";
-import {Users} from "./components/Users/Users";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {Users} from "./components/Users/Users";
 
-export type AppType =  {
+export type AppType = {
     /*state: StateType;
     dispatch: (action: ActionsTypes) => void;*/
 }
@@ -27,9 +27,11 @@ const App = (props: AppType) => {
                            render={() => <DialogsContainer/>}/>
 
                     <Route path='/profile'
-                           render={() => <Profile />}/>
+                           render={() => <Profile/>}/>
 
-                    <Route path='/users' render={ () => <UsersContainer/>}/>
+                    <Route path='/users'
+                           render={() => <UsersContainer/>}/>
+
 
                     <Route path='/news' render={() => <News/>}/>
 
