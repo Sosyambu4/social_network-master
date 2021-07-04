@@ -19,7 +19,12 @@ export type UserType = {
 }
 
 export type initialStateType = {
-    users: Array<UserType>
+    users: Array<UserType>,
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+
+
 }
 
 
@@ -45,12 +50,10 @@ export const setUsersAC = (users: Array<UserType>) => {
 }
 
 export const initialState: initialStateType = {
-    users: [/*
-        {id: 1,followed: false , fullName: 'Wladyslaw', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},
-        {id: 2,followed: true , fullName: 'Andrew', status:'i am a boss', location: {city:'Kharkov', country:'Ukraine'}},
-        {id: 3,followed: true , fullName: 'Sasha', status:'i am a boss', location: {city:'Minsk', country:'Belarus'}},
-        {id: 4,followed: false , fullName: 'Bogdan', status:'i am a boss', location: {city:'Gdansk', country:'Poland'}},*/
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 19,
+    currentPage: 1
 };
 
 

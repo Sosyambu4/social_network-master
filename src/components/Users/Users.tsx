@@ -8,16 +8,29 @@ import {UsersPropsType} from "./UsersContainer";
 
 export class Users extends React.Component<UsersPropsType> {
     componentDidMount() {
-            if (this.props.usersPage.users.length === 0) {
-
-                axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            /*if (this.props.usersPage.users.length === 0)*/ {
+                axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                    .then(response => {
                     this.props.setUsers(response.data.items)
                     }
                 )}
         }
 
     render () {
+
+        let pagesCount = Math.ceil( this.props.totalUsersCount / this.props.pageSize)
+        let pages = [];
+        for (let i=1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return <div>
+            <div>
+                { pages.map( p => {
+                   return <span className={this.props.currentPage === p ? user.selectedPage : ''}>{p}</span>
+                })}
+
+            </div>
             {/*<button onClick={this.getUsers}>Get Users</button>*/}
             {this.props.usersPage.users.map(u => {
                         console.log(u.photos)
