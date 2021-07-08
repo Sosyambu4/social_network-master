@@ -11,7 +11,7 @@ export type FindUsersPage = {
 
 export type UserType = {
     id: number
-    photos: {small: string | null, large: string | null}
+    photos: { small: string | null, large: string | null }
     followed: boolean
     name: string
     status: string
@@ -21,7 +21,7 @@ export type UserType = {
 export type initialStateType = {
     users: Array<UserType>,
     pageSize: number
-    totalUsersCount: number
+    totalCount: number
     currentPage: number
 
 
@@ -32,6 +32,20 @@ export const followAC = (userId: number) => {
     return {
         type: "FOLLOW",
         userId
+    } as const
+}
+
+export const TotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: "SET_TOTAL-USERS",
+        count:totalCount
+    } as const
+}
+
+export const SetCarrentAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        currentPage
     } as const
 }
 
@@ -49,10 +63,10 @@ export const setUsersAC = (users: Array<UserType>) => {
     } as const
 }
 
-export const initialState: initialStateType = {
+export let initialState: initialStateType = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 19,
+    pageSize: 6,
+    totalCount: 30,
     currentPage: 1
 };
 
@@ -81,10 +95,17 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
             };
         case "SET-USERS":
             return {
-                ...state,
-                users: [...state.users, ...action.users]
+                ...state, users: action.users
             }
-
+        case "SET-CURRENT-PAGE":
+            console.log(action.currentPage)
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case "SET_TOTAL-USERS":
+            return {
+                ...state, totalCount: action.count
+            }
         default:
             return state;
     }
