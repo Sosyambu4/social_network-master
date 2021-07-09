@@ -11,12 +11,13 @@ import {DialogsContainer} from "./components/Dialogs/DialogsConteiner";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {Users} from "./components/Users/Users";
 
+
 export type AppType = {
     /*state: StateType;
     dispatch: (action: ActionsTypes) => void;*/
 }
 
-const App = (props: AppType) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
