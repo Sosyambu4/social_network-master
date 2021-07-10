@@ -31,41 +31,41 @@ export type initialStateType = {
 }
 
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: "FOLLOW",
         userId
     } as const
 }
 
-export const TotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: "SET_TOTAL-USERS",
         count:totalCount
     } as const
 }
 
-export const SetCarrentAC = (currentPage: number) => {
+export const setCarrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage
     } as const
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId
     } as const
 }
 
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
         users
     } as const
 }
-export const TOGGLE_IS_FETCHINGAC = (isFetching: boolean) => {
+export const setToggle_is_Fetching = (isFetching: boolean) => {
     return {
         type: "TOGGLE_IS_FETCHING",
         isFetching

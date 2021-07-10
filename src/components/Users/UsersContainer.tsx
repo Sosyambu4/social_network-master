@@ -1,12 +1,11 @@
 import React from 'react';
 import {AppStoreType} from '../../redux/redux-store';
 import {
-    followAC,
-    initialStateType,
-    SetCarrentAC,
-    setUsersAC, TOGGLE_IS_FETCHINGAC,
-    TotalUsersCountAC,
-    unfollowAC,
+    follow, setCarrentPage,
+    setToggle_is_Fetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     UserType
 } from '../../redux/users-reducer';
 import {connect} from 'react-redux';
@@ -91,27 +90,7 @@ const mapStateToProps = (state: AppStoreType): MapStatePropsType => {
 
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(SetCarrentAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(TotalUsersCountAC(totalCount))
-        },
-        setToggle_is_Fetching: (isFetching: boolean) => {
-            dispatch(TOGGLE_IS_FETCHINGAC(isFetching))
-        }
-    }
-}
 
-export const UsersContainer =  connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+
+export const UsersContainer =  connect(mapStateToProps, {follow, unfollow, setUsers, setCarrentPage, setTotalUsersCount, setToggle_is_Fetching})(UserContainer);
+
