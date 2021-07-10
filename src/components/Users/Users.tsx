@@ -1,10 +1,24 @@
 import React from "react";
-import {UsersPropsType} from "./UsersContainer";
 import user from "./User.module.css";
 import userPhoto from "./../../assets/images/users1.png"
+import {UserType} from "../../redux/users-reducer";
 
 
-export const Users = (props: UsersPropsType) => {
+type UsersOwnType =  {
+    onPageChanged:(currentPage: number) => void;
+    follow: (userId: number) => void;
+    unfollow: (userId: number) => void;
+    setUsers: (users: Array<UserType>) => void;
+    setCurrentPage: (currentPage: number) => void;
+    setTotalUsersCount:(totalCount: number) => void;
+    users: Array<UserType>
+    pageSize: number
+    totalCount: number
+    currentPage: number
+}
+
+
+export const Users = (props: UsersOwnType ) => {
 
 
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
@@ -23,7 +37,6 @@ export const Users = (props: UsersPropsType) => {
             })}
 
         </div>
-        <button onClick={this.getUser}>Get Users</button>
         {props.users.map(u => {
             console.log(u.photos)
             return  <div key={u.id}>

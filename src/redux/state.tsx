@@ -3,7 +3,7 @@ import {v1} from "uuid";
 
 import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
 import {dialogsReducer, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogs-reducer";
-import {followAC, SetCarrentAC, setUsersAC, TotalUsersCountAC, unfollowAC} from "./users-reducer";
+import {followAC, SetCarrentAC, setUsersAC, TOGGLE_IS_FETCHINGAC, TotalUsersCountAC, unfollowAC} from "./users-reducer";
 
 export type DialogItemType = {
     id: string;
@@ -57,7 +57,9 @@ export type ActionsTypes =
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC> |
     ReturnType<typeof SetCarrentAC> |
-    ReturnType<typeof TotalUsersCountAC>
+    ReturnType<typeof TotalUsersCountAC> |
+    ReturnType<typeof TOGGLE_IS_FETCHINGAC>
+
 
 
 

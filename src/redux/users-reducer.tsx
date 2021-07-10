@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 import state, {ActionsTypes} from "./state";
+import preloader from "../assets/images/Spinner-1.8s-200px.svg";
+import React from "react";
 
 export type UsersLocation = {
     city: string
@@ -23,6 +25,7 @@ export type initialStateType = {
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 
 
 }
@@ -62,12 +65,20 @@ export const setUsersAC = (users: Array<UserType>) => {
         users
     } as const
 }
+export const TOGGLE_IS_FETCHINGAC = (isFetching: boolean) => {
+    return {
+        type: "TOGGLE_IS_FETCHING",
+        isFetching
+    } as const
+}
 
 export let initialState: initialStateType = {
     users: [],
-    pageSize: 6,
-    totalCount: 30,
-    currentPage: 1
+    pageSize: 5,
+    totalCount: 0,
+    currentPage: 1,
+    isFetching: true
+
 };
 
 
@@ -105,6 +116,10 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
         case "SET_TOTAL-USERS":
             return {
                 ...state, totalCount: action.count
+            }
+            case "TOGGLE_IS_FETCHING":
+            return {
+                ...state, isFetching: action.isFetching
             }
         default:
             return state;
