@@ -12,17 +12,26 @@ export const newTextChangeHandlerAC = (newText: string) => {
         newText: newText
     } as const
 }
+export const setUsersProfile = (profile: string) => {
+    return {
+        type: 'SET_USERS_PROFILE',
+        profile: profile
+    } as const
+}
 
 const initialState = {
     newPostText: "",
     posts: [
         {id: v1(), message: "Hi,how are you?", likesCount: 12},
-        {id: v1(), message: "It's my first post", likesCount: 10}]
+        {id: v1(), message: "It's my first post", likesCount: 10}],
+    profile: null
 }
 
 export type ProfileType = {
     posts: Array<PostsType>
     newPostText: string;
+    profile: null | string
+
 }
 export type PostsType = {
     message: string;
@@ -53,6 +62,9 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
                 newPostText: action.newText
             };
     }
+        case 'SET_USERS_PROFILE' : {
+            return {...state, profile: action.profile}
+        }
         default: return state;
     }
 

@@ -17,6 +17,7 @@ const mapStateToProps = (state: AppStoreType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
+
     }
 }
 const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): mapDispatchToProps => {

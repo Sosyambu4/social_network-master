@@ -45,7 +45,7 @@ export const setTotalUsersCount = (totalCount: number) => {
     } as const
 }
 
-export const setCarrentPage = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage

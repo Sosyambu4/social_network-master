@@ -9,17 +9,12 @@ export type ProfilePropsType =  {
     stateProfilePage: ProfileType*/
 }
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = () => {
     debugger
 
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-           {/* <MyPostsConteiner
-                posts={props.stateProfilePage.posts}
-                newPostText={props.stateProfilePage.newPostText}
-                dispatch={props.dispatch}
-            />*/}
             <MyPostsContainer/>
         </div>
     )

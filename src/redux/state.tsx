@@ -1,9 +1,16 @@
 import React from "react";
 import {v1} from "uuid";
 
-import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
+import {addPostAC, newTextChangeHandlerAC, profileReducer, setUsersProfile} from "./profile-reducer";
 import {dialogsReducer, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogs-reducer";
-import {follow, setCarrentPage, setToggle_is_Fetching, setTotalUsersCount, setUsers, unfollow} from "./users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setToggle_is_Fetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
+} from "./users-reducer";
 
 export type DialogItemType = {
     id: string;
@@ -56,9 +63,11 @@ export type ActionsTypes =
     ReturnType<typeof follow> |
     ReturnType<typeof unfollow> |
     ReturnType<typeof setUsers> |
-    ReturnType<typeof setCarrentPage> |
+    ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof setToggle_is_Fetching>
+    ReturnType<typeof setToggle_is_Fetching> |
+    ReturnType<typeof setUsersProfile>
+
 
 
 
@@ -100,7 +109,7 @@ export const store: StoreType = {
         return this.state
     },
     dispatch(action) { //type: 'ADD-POST'}
-debugger
+
         this.state.profilePage = profileReducer(this.state.profilePage, action)
         this.state.messagesPage = dialogsReducer(this.state.messagesPage, action)
         this.callSubscriber();

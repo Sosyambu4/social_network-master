@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppStoreType} from '../../redux/redux-store';
 import {
-    follow, setCarrentPage,
+    follow, setCurrentPage,
     setToggle_is_Fetching,
     setTotalUsersCount,
     setUsers,
@@ -9,11 +9,9 @@ import {
     UserType
 } from '../../redux/users-reducer';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 import axios from 'axios';
 import {Users} from './Users'
-import preloader from '../../assets/images/Spinner-1.8s-200px.svg'
-import { Preloader } from '../common/Preloader/PreLoader';
+import {Preloader} from '../common/Preloader/PreLoader';
 
 
 type MapStatePropsType = {
@@ -92,5 +90,5 @@ const mapStateToProps = (state: AppStoreType): MapStatePropsType => {
 }
 
 
-export const UsersContainer =  connect(mapStateToProps, {follow, unfollow, setUsers, setCarrentPage, setTotalUsersCount, setToggle_is_Fetching})(UserContainer);
+export const UsersContainer =  connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggle_is_Fetching})(UserContainer);
 

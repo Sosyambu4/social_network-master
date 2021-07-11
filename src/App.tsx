@@ -2,14 +2,13 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from './components/New/New';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Setting";
 import {DialogsContainer} from "./components/Dialogs/DialogsConteiner";
 import {UsersContainer} from "./components/Users/UsersContainer";
-import {Users} from "./components/Users/Users";
+import {ProlifeContainer} from "./components/Profile/ProfileContainer";
 
 
 export type AppType = {
@@ -28,7 +27,7 @@ const App = () => {
                            render={() => <DialogsContainer/>}/>
 
                     <Route path='/profile'
-                           render={() => <Profile/>}/>
+                           render={() => <ProlifeContainer/>}/>
 
                     <Route path='/users'
                            render={() => <UsersContainer/>}/>
