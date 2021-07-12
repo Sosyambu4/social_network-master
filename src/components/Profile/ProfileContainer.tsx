@@ -1,19 +1,24 @@
 import React from 'react';
 import Profile from "./Profile";
-import {setUsersProfile} from "../../redux/profile-reducer";
+import {setUsersProfile, userProfileInfo} from "../../redux/profile-reducer";
 import axios from "axios";
-import {connect} from "react-redux";
+import {connect, MapDispatchToProps} from "react-redux";
 import {AppStoreType} from "../../redux/redux-store";
 
 
-type ProfileOwnType = MapStatePropsType & MapDispatchPropsType;
+type OwnPropsType = {}
+
+export type ProfileOwnType = MapStatePropsType & MapDispatchPropsType
+
+;
 
 type MapDispatchPropsType = {
-    setProfile:(profile:string) => void
+    setUsersProfile:(profile:userProfileInfo | null) => void
 }
 
 type MapStatePropsType =  {
-    profile: string
+   profile: userProfileInfo | null
+
 }
 
 class MyProfile extends React.Component<ProfileOwnType> {
@@ -22,7 +27,7 @@ class MyProfile extends React.Component<ProfileOwnType> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
 
-                this.props.setProfile(response.data);
+                this.props.setUsersProfile(response.data);
 
             })
 
@@ -30,13 +35,17 @@ class MyProfile extends React.Component<ProfileOwnType> {
 
     render() {
         return (
-            <Profile {...this.props}/>
+            <Profile {...this.props} profile={this.props.profile}/>
         )
     }
 }
 
-let mapStateToProps = (state: AppStoreType): MapStatePropsType => ({
-    profile: state.profilePage.profile
-})
+let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
+    return {
+        profile: state.profilePage.profile
+        // photos: state.profilePage.profile.photos
 
-export const ProlifeContainer = connect (mapStateToProps,{setUsersProfile}) (MyProfile);
+    }
+}
+export const ProlifeContainer = connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStoreType
+    > (mapStateToProps,{setUsersProfile}) (MyProfile);

@@ -110,7 +110,7 @@ export const store: StoreType = {
     },
     dispatch(action) { //type: 'ADD-POST'}
 
-        this.state.profilePage = profileReducer(this.state.profilePage, action)
+       /* this.state.profilePage = profileReducer(this.state.profilePage, action)*/
         this.state.messagesPage = dialogsReducer(this.state.messagesPage, action)
         this.callSubscriber();
 

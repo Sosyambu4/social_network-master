@@ -12,7 +12,7 @@ export const newTextChangeHandlerAC = (newText: string) => {
         newText: newText
     } as const
 }
-export const setUsersProfile = (profile: string) => {
+export const setUsersProfile = (profile: userProfileInfo | null ) => {
     return {
         type: 'SET_USERS_PROFILE',
         profile: profile
@@ -27,10 +27,25 @@ const initialState = {
     profile: null
 }
 
+export type userProfileInfo = {
+    aboutMe: string | null;
+    contacts: {vk: string},
+    lookingForAJob: boolean | null;
+    lookingForAJobDescription: string | null;
+    fullName: string | null;
+    userId: number;
+    photos: {
+        small: string;
+        large: string;
+    }
+}
+
+
 export type ProfileType = {
     posts: Array<PostsType>
     newPostText: string;
-    profile: null | string
+    profile: userProfileInfo | null;
+
 
 }
 export type PostsType = {
@@ -39,7 +54,7 @@ export type PostsType = {
     id?: string;
 }
 
-export const profileReducer = (state: ProfileType = initialState, action: ActionsTypes) => {
+export const profileReducer = (state: ProfileType = initialState, action: ActionsTypes):ProfileType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostsType = {
